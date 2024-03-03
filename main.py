@@ -11,9 +11,10 @@ from nltk.stem.lancaster import LancasterStemmer
 
 stemmer = LancasterStemmer()
 
-def translate_text(text, target_lang='ja'):
+def translate_text(text):
   translator = Translator()
-  translated_text = translator.translate(text, dest=target_lang)
+  translated_text = translator.translate(text, dest="ja")
+  listbox.append(translate_text(user_input))
   return translated_text.text
 
 questions = ["do i need to use an ez-link card to use public transportation?", 
@@ -37,6 +38,7 @@ def submit():
         answer_index = questions.index(user_input)
         listbox.append("You: " + user_input)
         listbox.append(translate_text("Bot: " + answers[answer_index]))
+        listbox.append("Bot: " + translate_text.answers[answer_index])
     else:
         user_input_stemmed = stemmer.stem(user_input)
         matches = []
