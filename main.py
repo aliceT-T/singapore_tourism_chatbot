@@ -1,7 +1,8 @@
 from guizero import App, Text, TextBox, PushButton, ListBox
 import nltk
 from nltk.corpus import wordnet as wn
-from googletrans import Translator
+from googletrans import Translator, constants
+from pprint import pprint
 
 app = App(title="Singapore", layout="grid")
 
@@ -14,7 +15,6 @@ stemmer = LancasterStemmer()
 def translate_text(text):
   translator = Translator()
   translated_text = translator.translate(text, dest="ja")
-  listbox.append(translate_text(user_input))
   return translated_text.text
 
 questions = ["do i need to use an ez-link card to use public transportation?", 
@@ -37,8 +37,7 @@ def submit():
     if user_input in questions:
         answer_index = questions.index(user_input)
         listbox.append("You: " + user_input)
-        listbox.append(translate_text("Bot: " + answers[answer_index]))
-        listbox.append("Bot: " + translate_text.answers[answer_index])
+        listbox.append("Bot: " + translate_text(answers[answer_index]))
     else:
         user_input_stemmed = stemmer.stem(user_input)
         matches = []
@@ -56,19 +55,18 @@ def submit():
                 question_synonyms = set()
                 for word in q_stemmed.split():
                     question_synonyms.update(get_synonyms(word))
-
                 match = len(user_synonyms.intersection(question_synonyms))
-
             matches.append(match)
 
         maxMatch = max(matches)
+        translate_text(answr)
         if maxMatch == 0:
             listbox.append("Bot: I'm sorry, I don't understand.")
         else:
             if matches.count(maxMatch) == 1:  # If only one match found
                 answer_index = matches.index(maxMatch)
                 listbox.append("You: " + user_input)
-                listbox.append("Bot: " + answers[answer_index])
+                listbox.append("Bot: " + translate_text(answers[answer_index]))
             else:  # If multiple matches found
                 listbox.append("Bot: Did you mean...")
                 for f, match in enumerate(matches):
