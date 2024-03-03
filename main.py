@@ -1,4 +1,4 @@
-from guizero import App, Text, TextBox, PushButton, ListBox, Combo
+from guizero import App, Text, TextBox, PushButton, ListBox
 import nltk
 from nltk.corpus import wordnet as wn
 from googletrans import Translator, constants
@@ -17,7 +17,6 @@ answers = []
 
 def translate_text(text):
   translator = Translator()
-  l = combo.value()
   translated_text = translator.translate(text, dest="de")
   return translated_text.text
 
@@ -82,10 +81,8 @@ def submit():
                         listbox.append("Bot: " + questions[f])
     input_box.clear()
 message_one = Text(app, text="Welcome to Singapore!", grid=[0, 0])
-message_two = Text(app, text="How can I help you today?", grid=[0,2])
-message_three = Text(app, text="Language:", grid=[1, 0])
-combo = Combo(app, options=["English", "French", "German", "Japanese","Chinese"],grid=[1,1])
-input_box = TextBox(app, "", width=40, grid=[0, 3])
-submit_button = PushButton(app, text="Submit", command=submit, grid=[1, 3])
-listbox = ListBox(app, items=[], grid=[0, 4], width=300, height=300)
+message_two = Text(app, text="How can I help you today?", grid=[0, 1])
+input_box = TextBox(app, "", width=40, grid=[0, 2])
+submit_button = PushButton(app, text="Submit", command=submit, grid=[1, 2])
+listbox = ListBox(app, items=[], grid=[0, 3], width=300, height=300)
 app.display()
