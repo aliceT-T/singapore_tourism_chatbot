@@ -5,7 +5,7 @@ from googletrans import Translator, constants
 from deep_translator import GoogleTranslator
 from pprint import pprint
 
-app = App(title="Singapore", layout="grid")
+app = App(title="Singapore", layout="grid", bg="#ADD8E6")
 
 nltk.download("punkt")
 nltk.download("wordnet")
@@ -107,7 +107,9 @@ def dutbut():
 
       maxMatch = max(matches)
       if maxMatch == 0:
-          listbox.append("Bot: I'm sorry, I don't understand.")
+        g = str("Bot: I'm sorry, I don't understand.")
+        gg = GoogleTranslator(source='auto', target='de').translate(g) 
+        listbox.append(gg)
       else:
           if matches.count(maxMatch) == 1:  # If only one match found
               answer_index = matches.index(maxMatch)
@@ -122,7 +124,7 @@ def dutbut():
                       listbox.append("Bot: " + questions[f])
   input_box.clear()
 
-def japbut():
+def frebut():
   user_input = input_box.value.lower().strip()
   if user_input in questions:
       answer_index = questions.index(user_input)
@@ -150,13 +152,15 @@ def japbut():
   
       maxMatch = max(matches)
       if maxMatch == 0:
-          listbox.append("Bot: I'm sorry, I don't understand.")
+          f = str("Bot: I'm sorry, I don't understand.")
+          ff = GoogleTranslator(source='auto', target='fr').translate(f) 
+          listbox.append(ff)
       else:
           if matches.count(maxMatch) == 1:  # If only one match found
               answer_index = matches.index(maxMatch)
               listbox.append("You: " + user_input)
               t = str("Bot: " + answers[answer_index])
-              tt = GoogleTranslator(source='auto', target='ja').translate(t) 
+              tt = GoogleTranslator(source='auto', target='fr').translate(t) 
               listbox.append(tt)
           else:  # If multiple matches found
               listbox.append("Bot: Did you mean...")
@@ -169,7 +173,7 @@ message_one = Text(app, text="Welcome to Singapore!", grid=[0, 0])
 message_two = Text(app, text="How can I help you today?", grid=[0, 1])
 input_box = TextBox(app, "", width=40, grid=[0, 2])
 engbut = PushButton(app, text="English", command=engbut, grid=[1, 2])
-listbox = ListBox(app, items=[], grid=[0, 3], width=300, height=300)
+listbox = ListBox(app, items=[], grid=[0, 3], width=450, height=300)
 dutbut = PushButton(app,text="German",command=dutbut,grid=[2,2])
-japbut = PushButton(app,text="Japanese",command=japbut,grid=[3,2])
+frebut = PushButton(app,text="French",command=frebut,grid=[3,2])
 app.display()
