@@ -1,4 +1,4 @@
-from guizero import App, Text, TextBox, PushButton, ListBox, Combo
+from guizero import App, Text, TextBox, PushButton, ListBox
 import nltk
 from nltk.corpus import wordnet as wn
 from googletrans import Translator, constants
@@ -172,8 +172,8 @@ def frebut():
 message_one = Text(app, text="Welcome to Singapore!", grid=[0, 0])
 message_two = Text(app, text="How can I help you today?", grid=[0, 1])
 input_box = TextBox(app, "", width=40, grid=[0, 2])
-engbut = PushButton(app, text="English", command=engbut, grid=[1, 2])
+eng_but = PushButton(app, text="English", command=engbut, grid=[1, 2])
 listbox = ListBox(app, items=[], grid=[0, 3], width=450, height=300)
-dutbut = PushButton(app,text="Deutsch",command=dutbut,grid=[2,2])
-frebut = PushButton(app,text="Français",command=frebut,grid=[3,2])
+dut_but = PushButton(app,text="Deutsch",command=dutbut,grid=[2,2])
+fre_but = PushButton(app,text="Français",command=frebut,grid=[3,2])
 app.display()
